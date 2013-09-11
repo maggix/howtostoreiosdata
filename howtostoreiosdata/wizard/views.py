@@ -4,6 +4,10 @@ from django.views.generic import TemplateView
 from .models import Recommendation
 
 
+class StartView(TemplateView):
+    template_name = "wizard/start.html"
+
+
 class QuestionView(TemplateView):
     template_name = "wizard/question.html"
 
@@ -30,14 +34,14 @@ class QuestionStorageView(QuestionView):
     options = (
         (Recommendation.STORAGE.core_data, 'Core Data'),
         (Recommendation.STORAGE.defaults, 'NSUserDefaults'),
-        (Recommendation.STORAGE.rawsql, 'Raw SQLite/FMDB database'),
+        (Recommendation.STORAGE.rawsql, 'Raw SQLite database'),
         (Recommendation.STORAGE.raw_data, 'Raw NSData files'),
         (Recommendation.STORAGE.keychain, 'Keychain'),
     )
 
 
 class QuestionBackgroundView(QuestionView):
-    question = "Does your app need to run in the bakground?"
+    question = "Does your app need to run in the background?"
     question_short_name = 'question_background'
     next_view = 'wizard:question_sharing'
     options = (
@@ -52,8 +56,8 @@ class QuestionSharingView(QuestionView):
     question_short_name = 'question_sharing'
     next_view = 'wizard:result'
     options = (
-        ('YES', 'Yes'),
-        ('NO', 'No'),
+        ('NO', 'No, the data will only be used by my app'),
+        ('YES', 'Yes, my other apps will use this data too'),
     )
 
 

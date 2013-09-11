@@ -8,38 +8,22 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+{#    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">#}
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
         body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            margin-top: 40px;
         }
     </style>
-    <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     {% block extra_head %}{% endblock %}
 </head>
 
 <body>
 
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="/">How to store iOS data</a>
-                <!--<div class="nav-collapse">-->
-                    <!--<ul class="nav">-->
-                        <!--<li class="active"><a href="/">Home</a></li>-->
-                    <!--</ul>-->
-                <!--</div>&lt;!&ndash;/.nav-collapse &ndash;&gt;-->
-            </div>
-        </div>
-    </div>
-
     <div class="container">
-
         {% block content %}{% endblock %}
 
         <hr>
@@ -47,10 +31,6 @@
         <footer>
             <p>Built by Erik Romijn, <a href="http://solidlinks.nl">Solid Links</a>.</p>
         </footer>
-    </div> <!-- /container -->
-
-    <script src="{% static 'js/jquery-1.10.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
+    </div>
 </body>
 </html>

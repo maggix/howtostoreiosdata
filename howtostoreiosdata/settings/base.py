@@ -37,7 +37,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     PROJECT_DIR.child('assets'),
-    PROJECT_DIR.child('bootstrap'),
 )
 
 # List of finder classes that know how to find static files in

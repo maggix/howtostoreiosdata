@@ -11,8 +11,8 @@ class Recommendation(TimeStampedModel):
     STORAGE = Choices(
         ('core_data', 'Core Data'),
         ('defaults', 'NSUserDefaults'),
-        ('rawsql', 'Raw SQLite'),
-        ('raw_data', 'Raw NSdata'),
+        ('rawsql', 'raw SQLite'),
+        ('raw_data', 'raw NSdata'),
         ('keychain', 'Keychain')
     )
 
@@ -65,8 +65,7 @@ FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
 [database openWithFlags:flags]""",
 
 
-        STORAGE.raw_data: """NSData *contents =
-    [@"secret file contents" dataUsingEncoding:NSUTF8StringEncoding];
+        STORAGE.raw_data: """NSData *contents = [@"secret file contents" dataUsingEncoding:NSUTF8StringEncoding];
 
 [contents writeToFile:path
           options:%s
@@ -78,7 +77,7 @@ NSString *password = @"password";
 
 NSMutableDictionary *item = [NSMutableDictionary dictionary];
 
-// Note that metadata, like the account name is not encrypted
+// Note that metadata, like the account name, is not encrypted.
 [item setObject:account
           forKey:(id)kSecAttrAccount];
 

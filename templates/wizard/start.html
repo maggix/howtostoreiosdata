@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="jumbotron">
+
+        <h1>“How should I store data in my iOS app securely?”</h1>
+        <p>iOS has many excellent features to protect your user's data. However, finding your way through all the
+        slightly different APIs and settings for all the different storage methods can be challenging.</p>
+
+        <p>
+            That's why I built howtostoreiosdata.com.
+            Run through a few basic questions, and get an advice on how to store
+            your data as securely as possible, along with a code sample.
+        </p>
+
+        <p><a href="{% url 'wizard:question_storage' %}" class="btn btn-primary btn-lg btn-block">
+            Get started
+        </a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Who built this?</h2>
+            <p class="lead">I'm <a href="http://twitter.com/erikpub">Erik Romijn</a>, App Maker from Amsterdam, The Netherlands.
+                I love making apps - for both mobile and web. I do a mix of freelance work and independent projects, mostly with Django and iOS. </p>
+            <p>I live in the wonderful city of <a href="http://appsterdam.rs/">Appsterdam</a>, where we are
+                working to create the best place in the world to be or become an App Maker.</p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Why was this built?</h2>
+            <p class="lead">I was looking into secure iOS data storage, and found that it can be very difficult to
+            discover how particular data is best protected, and what the API looks like. It's important that
+            security is as simple as possible, so I built this site to improve that.</p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Can I help?</h2>
+            <p class="lead">Yes! This is a work in progress, and there is much left to do.
+            All the code is on <a href="http://github.com/erikr/howtostoreiosdata/">GitHub</a>.
+            Have a look through the <a href="#">open issues</a>.
+            And even if you can't contribute code, you can suggest improvements by
+            <a href="#">creating a new issue</a>.</p>
+        </div>
+    </div>
+
+{% endblock content %}
