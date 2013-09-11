@@ -13,6 +13,15 @@
             {{ recommendation.protection_level_explanation }}
         </p>
 
+        {% if recommendation.storage == 'keychain' %}
+            <p>
+                The iOS Keychain is an efficient and secure storage, meant for small bits of sensitive data, like passwords
+                or API tokens. It is not meant for data more than a few kilobytes. In that way, it is a little bit like
+                NSUserDefaults. But when it comes to  security, NSUserDefaults offers none at all, and Keychain was designed specifically
+                with security in mind.
+            </p>
+        {% endif %}
+
         {% if chosen_sharing %}
             <p>
                 You may prefer to use another storage method, but Keychain is your only option to securely share
