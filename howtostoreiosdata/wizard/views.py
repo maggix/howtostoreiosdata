@@ -45,9 +45,9 @@ class QuestionBackgroundView(QuestionView):
     question_short_name = 'question_background'
     next_view = 'wizard:question_sharing'
     options = (
-        ('NO', 'No'),
-        ('YES', 'Yes'),
-        ('OPENONLY', 'Yes, but only for finishing work on open files, like finishing a download.'),
+        ('NO', 'No, not at all'),
+        ('YES', 'Yes, all the time'),
+        ('OPENONLY', 'Yes, but only for finishing work on open files'),
     )
 
 
