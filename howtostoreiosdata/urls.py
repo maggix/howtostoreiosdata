@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     (r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    #url(r'^', include('howtostoreiosdata.app.urls', namespace="app")),
+    url(r'^', include('howtostoreiosdata.wizard.urls', namespace="wizard")),
 )
 
 

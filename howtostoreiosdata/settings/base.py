@@ -104,7 +104,7 @@ INSTALLED_APPS = (
     'geordi',
     'crispy_forms',
 
-    # your apps here
+    'howtostoreiosdata.wizard',
 )
 
 # A sample logging configuration. The only tangible logging

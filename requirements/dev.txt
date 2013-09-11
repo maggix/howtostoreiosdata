@@ -1,7 +1,10 @@
 -r base.txt
 coverage==3.6
 django-coverage==1.2.4
-django-debug-toolbar==0.9.4
+
+# We are using Django 1.6, which is only supported by the dev version of debug toolbar
+-e git+http://github.com/django-debug-toolbar/django-debug-toolbar.git#egg=django-debug-toolbar
+
 django-discover-runner==0.4
 django-discoverage==0.7.0
 mock==1.0.1

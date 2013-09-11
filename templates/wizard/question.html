@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ question }}</h1>
+
+    {% for option in options %}
+        <a href="?answer={{ option.0 }}">{{ option.1 }}</a>
+        <br />
+    {% endfor %}
+
+
+{% endblock content %}

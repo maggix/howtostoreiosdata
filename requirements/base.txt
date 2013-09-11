@@ -9,3 +9,4 @@ geordi==0.3
 django-braces==1.2.2
 bpython==0.12
 django-crispy-forms==1.4.0
+django-model-utils==1.5.0

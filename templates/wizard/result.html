@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>
+        Based on your answers, your best option would be to use a {{ recommendation.get_storage_display }} storage with
+        the {{ recommendation.protection_level_full_name }} protection.
+        {{ recommendation.protection_level_explanation }}
+    </p>
+
+    <h2>Code sample</h2>
+    <pre>{{ recommendation.code_sample }}</pre>
+{% endblock content %}
