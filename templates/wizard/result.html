@@ -2,10 +2,11 @@
 
 {% block content %}
     <div class="jumbotron">
-        <h1>Your results</h1>
+        <h1>Your recommendation</h1>
         <p>
-            Based on your answers, your best option would be to use a {{ recommendation.get_storage_display }} storage with
-            the {{ recommendation.protection_level_full_name }} protection.
+            Based on your answers, your best option would be to use a
+            <strong>{{ recommendation.get_storage_display }}</strong> storage with
+            the <strong>{{ recommendation.protection_level_full_name }}</strong> protection.
         </p>
 
         <p>
@@ -27,7 +28,5 @@
     <a href="https://github.com/erikr/howtostoreiosdata/issues/new">Create an issue</a> on GitHub!</p>
 
     <p><a href="/" class="btn btn-info btn-lg btn-block">Start again</a></p>
-
-
 
 {% endblock content %}
