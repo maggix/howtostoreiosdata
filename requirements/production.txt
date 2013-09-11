@@ -1,0 +1,4 @@
+-r base.txt
+mysql-python==1.2.4
+flup==1.0.3.dev-20110405
+distribute==0.6.35
