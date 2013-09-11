@@ -3,7 +3,7 @@
 {% block content %}
     <div class="jumbotron">
         <h1>{{ question }}</h1>
-
+        <hr />
         <p class="text-center">
             {% for option in options %}
                 <a href="?answer={{ option.0 }}" class="btn btn-primary btn-lg">{{ option.1 }}</a>
