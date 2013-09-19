@@ -20,8 +20,6 @@ USE_I18N = False
 USE_L10N = False
 USE_TZ = True
 
-GRAPPELLI_ADMIN_TITLE = 'howtostoreiosdata'
-
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -61,7 +59,6 @@ MIDDLEWARE_CLASSES = (
     'djangosecure.middleware.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'geordi.VisorMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -88,19 +85,13 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'grappelli',
-    'django.contrib.admin',
-
-    'south',
     'django_extensions',
     'djangosecure',
-    'geordi',
     'crispy_forms',
 
     'howtostoreiosdata.wizard',

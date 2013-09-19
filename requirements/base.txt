@@ -1,11 +1,8 @@
 https://www.djangoproject.com/download/1.6b4/tarball/
-South==0.8.2
 Unipath==1.0
 django-extensions==1.2.0
-django-grappelli==2.4.6
 django-secure==1.0
 wsgiref==0.1.2
-geordi==0.3
 django-braces==1.2.2
 bpython==0.12
 django-crispy-forms==1.4.0
