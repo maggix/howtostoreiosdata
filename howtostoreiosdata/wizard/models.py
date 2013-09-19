@@ -1,6 +1,7 @@
+from .code_samples import CODE_SAMPLE_CORE_DATA, CODE_SAMPLE_SQL, CODE_SAMPLE_RAW_DATA, CODE_SAMPLE_KEYCHAIN
+
 
 # Note that this is not a Django database model.
-
 
 class RecommendationEngine(object):
     # This is 'Always' from the NSFileManager/NSData perspective, where always means "always protect".
@@ -33,68 +34,13 @@ class RecommendationEngine(object):
             closed, you can no longer open the file."""
     }
 
+    # There is no code sample for STORAGE_DEFAULTS, as we never recommend that storage
     STORAGE_CODE_SAMPLE = {
-        STORAGE_CORE_DATA: """- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-  if (persistentStoreCoordinator_ != nil) {
-    return persistentStoreCoordinator_;
-  }
-
-  persistentStoreCoordinator_ = [[NSPersistentStoreCoordinator alloc]
-                        initWithManagedObjectModel:[self managedObjectModel]];
-
-  NSURL *storeURL = [NSURL fileURLWithPath:
-        [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"MyStore.sqlite"]];
-
-  [persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType
-                     configuration:nil URL:storeURL options:nil error:&error]);
-
-  NSDictionary *fileAttributes = [NSDictionary
-                 dictionaryWithObject:%s
-                 forKey:NSFileProtectionKey];
-  [[NSFileManager defaultManager] setAttributes:fileAttributes
-                      ofItemAtPath:[storeURL path] error: &error]);
-
-  return persistentStoreCoordinator_;
-}""",
-        STORAGE_SQL: """int flags = SQLITE_OPEN_CREATE |
-            SQLITE_OPEN_READWRITE |
-            %s;
-
-sqlite3_open_v2(path, &database, flags, NULL)
-
-// Or, if you prefer FMDB:
-FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
-[database openWithFlags:flags]""",
-
-
-        STORAGE_RAW_DATA: """NSData *contents = [@"secret file contents" dataUsingEncoding:NSUTF8StringEncoding];
-
-[contents writeToFile:path
-          options:%s
-            error:&error];""",
-
-
-        STORAGE_KEYCHAIN: """NSString *account = @"username";
-NSString *password = @"password";
-
-NSMutableDictionary *item = [NSMutableDictionary dictionary];
-
-// Note that metadata, like the account name, is not encrypted.
-[item setObject:account
-          forKey:(id)kSecAttrAccount];
-
-[item setObject:(id)kSecClassGenericPassword
-          forKey:(id)kSecClass];
-
-[item setObject:(id)%s
-          forKey:(id)kSecAttrAccessible];
-
-[item setObject:[password dataUsingEncoding:NSUTF8StringEncoding]
-          forKey:(id)kSecValueData];
-
-OSStatus error = SecItemAdd((CFDictionaryRef)item, NULL);""",
+        STORAGE_CORE_DATA: CODE_SAMPLE_CORE_DATA,
+        STORAGE_SQL: CODE_SAMPLE_SQL,
+        STORAGE_RAW_DATA: CODE_SAMPLE_RAW_DATA,
+        STORAGE_KEYCHAIN: CODE_SAMPLE_KEYCHAIN,
     }
-
 
     PROTECTION_LEVEL_FULL_NAME = {
         STORAGE_CORE_DATA: {
@@ -117,7 +63,6 @@ OSStatus error = SecItemAdd((CFDictionaryRef)item, NULL);""",
             PROTECTION_LEVEL_AFTER_FIRST_UNLOCK: 'kSecAttrAccessibleAfterFirstUnlock',
         },
     }
-
 
     def __init__(self, storage, background, sharing):
         self.sharing = sharing
@@ -146,7 +91,8 @@ OSStatus error = SecItemAdd((CFDictionaryRef)item, NULL);""",
         return self.PROTECTION_LEVEL_EXPLANATION[self.protection_level]
 
     def code_sample(self):
-        return self.STORAGE_CODE_SAMPLE[self.storage] % self.protection_level_full_name()
+        sample = self.STORAGE_CODE_SAMPLE[self.storage] % self.protection_level_full_name()
+        return sample.strip()
 
     def protection_level_full_name(self):
         return self.PROTECTION_LEVEL_FULL_NAME[self.storage][self.protection_level]
