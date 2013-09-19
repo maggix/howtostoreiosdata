@@ -49,23 +49,14 @@ NSData *contents = [@"secret file contents" dataUsingEncoding:NSUTF8StringEncodi
 
 
 CODE_SAMPLE_KEYCHAIN = """
-NSString *account = @"username";
-NSString *password = @"password";
-
-NSMutableDictionary *item = [NSMutableDictionary dictionary];
-
 // Note that metadata, like the account name, is not encrypted.
-[item setObject:account
-          forKey:(id)kSecAttrAccount];
 
-[item setObject:(id)kSecClassGenericPassword
-          forKey:(id)kSecClass];
-
-[item setObject:(id)%s
-          forKey:(id)kSecAttrAccessible];
-
-[item setObject:[password dataUsingEncoding:NSUTF8StringEncoding]
-          forKey:(id)kSecValueData];
-
-OSStatus error = SecItemAdd((CFDictionaryRef)item, NULL);
+NSDictionary *item = @{
+    (__bridge id)kSecAttrAccount: account,
+    (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
+    (__bridge id)kSecAttrAccessible: (__bridge id)%s,
+    (__bridge id)kSecValueData: data,
+};
+    
+OSStatus error = SecItemAdd((__bridge CFDictionaryRef)item, NULL);
 """
