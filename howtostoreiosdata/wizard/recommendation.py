@@ -1,8 +1,6 @@
 from .code_samples import CODE_SAMPLE_CORE_DATA, CODE_SAMPLE_SQL, CODE_SAMPLE_RAW_DATA, CODE_SAMPLE_KEYCHAIN
 
 
-# Note that this is not a Django database model.
-
 class RecommendationEngine(object):
     # This is 'Always' from the NSFileManager/NSData perspective, where always means "always protect".
     PROTECTION_LEVEL_ALWAYS = 'always'
@@ -64,7 +62,7 @@ class RecommendationEngine(object):
         },
     }
 
-    def __init__(self, storage, background, sharing):
+    def __init__(self, storage, background, sharing=False):
         self.sharing = sharing
         self.background = background
         self.storage = self._recommended_storage(storage, sharing)

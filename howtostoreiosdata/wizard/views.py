@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
-from .models import RecommendationEngine
+from .recommendation import RecommendationEngine
 
 
 class StartView(TemplateView):
@@ -63,7 +63,6 @@ class ResultView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ResultView, self).get_context_data(**kwargs)
-
         background = self.request.session['question_background']
         storage = self.request.session['question_storage']
         sharing = self.request.session['question_sharing'] == 'YES'
