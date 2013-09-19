@@ -18,7 +18,7 @@
       <sourceFolder url="file://$MODULE_DIR$/templates" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/virtualenv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 2.7.2 virtualenv at ~/dev/howtostoreiosdata/virtualenv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
-from .models import Recommendation
+from .models import RecommendationEngine
 
 
 class StartView(TemplateView):
@@ -15,7 +15,7 @@ class QuestionView(TemplateView):
         if 'answer' in request.GET:
             answer = request.GET['answer']
             request.session[self.question_short_name] = answer
-            return HttpResponseRedirect(reverse(self.get_next_view(answer)))
+            return HttpResponseRedirect(reverse(self.next_view))
         else:
             context = {
                 'question': self.question,
@@ -23,20 +23,17 @@ class QuestionView(TemplateView):
             }
             return self.render_to_response(context)
 
-    def get_next_view(self, answer):
-        return self.next_view
-
 
 class QuestionStorageView(QuestionView):
     question = "How are you storing or planning to store your data?"
     question_short_name = 'question_storage'
     next_view = 'wizard:question_background'
     options = (
-        (Recommendation.STORAGE.core_data, 'Core Data'),
-        (Recommendation.STORAGE.defaults, 'NSUserDefaults'),
-        (Recommendation.STORAGE.rawsql, 'Raw SQLite database'),
-        (Recommendation.STORAGE.raw_data, 'Raw NSData files'),
-        (Recommendation.STORAGE.keychain, 'Keychain'),
+        (RecommendationEngine.STORAGE_CORE_DATA, 'Core Data'),
+        (RecommendationEngine.STORAGE_DEFAULTS, 'NSUserDefaults'),
+        (RecommendationEngine.STORAGE_SQL, 'Raw SQLite database'),
+        (RecommendationEngine.STORAGE_RAW_DATA, 'Raw NSData files'),
+        (RecommendationEngine.STORAGE_KEYCHAIN, 'Keychain'),
     )
 
 
@@ -45,9 +42,9 @@ class QuestionBackgroundView(QuestionView):
     question_short_name = 'question_background'
     next_view = 'wizard:question_sharing'
     options = (
-        ('NO', 'No, not at all'),
-        ('YES', 'Yes, all the time'),
-        ('OPENONLY', 'Yes, but only for finishing work on open files'),
+        (RecommendationEngine.BACKGROUND_NONE, 'No, not at all'),
+        (RecommendationEngine.BACKGROUND_ALWAYS, 'Yes, all the time'),
+        (RecommendationEngine.BACKGROUND_OPEN_ONLY, 'Yes, but only for finishing work on open files'),
     )
 
 
@@ -70,9 +67,8 @@ class ResultView(TemplateView):
         background = self.request.session['question_background']
         storage = self.request.session['question_storage']
         sharing = self.request.session['question_sharing'] == 'YES'
-        recommended_storage = self.recommended_storage(storage, sharing)
-        recommended_protection_level = self.recommended_protection_level(background, recommended_storage)
-        recommendation = Recommendation(storage=recommended_storage, protection_level=recommended_protection_level)
+
+        recommendation = RecommendationEngine(storage, background, sharing)
         context.update({
             'chosen_background': background,
             'chosen_storage': storage,
@@ -80,22 +76,3 @@ class ResultView(TemplateView):
             'recommendation': recommendation,
         })
         return context
-
-    def recommended_storage(self, storage, sharing):
-        if storage == Recommendation.STORAGE.defaults:
-            return Recommendation.STORAGE.keychain
-        if sharing:
-            return Recommendation.STORAGE.keychain
-        return storage
-
-    def recommended_protection_level(self, background, storage):
-        if background == 'YES':
-            return Recommendation.PROTECTION_LEVEL.after_first_unlock
-        if background == 'NO':
-            return Recommendation.PROTECTION_LEVEL.always
-
-        if background == 'OPENONLY':
-            if storage == Recommendation.STORAGE.keychain:
-                return Recommendation.PROTECTION_LEVEL.after_first_unlock
-            else:
-                return Recommendation.PROTECTION_LEVEL.unless_open

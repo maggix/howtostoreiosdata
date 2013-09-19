@@ -5,7 +5,7 @@
         <h1>Your recommendation</h1>
         <p>
             Based on your answers, your best option would be to use a
-            <strong>{{ recommendation.get_storage_display }}</strong> storage with
+            <strong>{{ recommendation.storage }}</strong> storage with
             the <strong>{{ recommendation.protection_level_full_name }}</strong> protection.
         </p>
 
@@ -13,7 +13,7 @@
             {{ recommendation.protection_level_explanation }}
         </p>
 
-        {% if recommendation.storage == 'keychain' %}
+        {% if recommendation.storage == 'Keychain' %}
             <p>
                 The iOS Keychain is an efficient and secure storage, meant for small bits of sensitive data, like passwords
                 or API tokens. It is not meant for data more than a few kilobytes. In that way, it is a little bit like
@@ -25,7 +25,9 @@
         {% if chosen_sharing %}
             <p>
                 You may prefer to use another storage method, but Keychain is your only option to securely share
-                data with other apps, by using Keychain access groups.
+                data with other apps, by using Keychain access groups. If your data is not suitable for Keychain,
+                e.g. because it is too large, you could use Keychain to exchange an encryption key securely,
+                and use that to encrypt the data before exchanging it in a less secure manner.
             </p>
         {% endif %}
 
