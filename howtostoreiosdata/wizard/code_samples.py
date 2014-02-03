@@ -14,13 +14,13 @@ CODE_SAMPLE_CORE_DATA = """
         [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"MyStore.sqlite"]];
 
   [persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType
-                     configuration:nil URL:storeURL options:nil error:&error]);
+                     configuration:nil URL:storeURL options:nil error:&error];
 
   NSDictionary *fileAttributes = [NSDictionary
                  dictionaryWithObject:%s
                  forKey:NSFileProtectionKey];
   [[NSFileManager defaultManager] setAttributes:fileAttributes
-                      ofItemAtPath:[storeURL path] error: &error]);
+                      ofItemAtPath:[storeURL path] error: &error];
 
   return persistentStoreCoordinator_;
 }"""
